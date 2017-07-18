@@ -5,12 +5,18 @@ export default class Holo {
 
   canvasSelector = undefined;
   helpers = undefined;
+  recoil = undefined;
+  xOffset = 0;
+  yOffset = 0;
 
-  constructor() {
+  constructor(recoil) {
     this.helpers = new Helpers();
+    this.recoil = recoil;
   }
 
-  create(canvasSelector) {
+  create(canvasSelector, xOffset, yOffset) {
+    this.yOffset = yOffset;
+    this.xOffset = xOffset;
     this.canvasSelector = canvasSelector;
 
     const element = $(canvasSelector);
@@ -20,11 +26,35 @@ export default class Holo {
     $(cursorHtml).appendTo(element);
 
     const cursor = $('.page-host .holoSight');
+    const that = this;
 
     element.mousemove((e) => {
-      cursor.css('top', (e.pageY - 156));
-      cursor.css('left', (e.pageX - 16));
+      cursor.css('top', (e.pageY - that.yOffset));
+      cursor.css('left', (e.pageX - that.xOffset));
     });
+  }
+
+  processRecoil() {
+    if (this.recoil === undefined) {
+      return;
+    }
+
+    const result = this.recoil.compute();
+    const cursorSelector = '.page-host .holoSight';
+    const cursor = $(cursorSelector);
+
+    this.xOffset += result.x;
+    this.yOffset += result.y;
+
+    const top = this.helpers.getPixelSize(cursorSelector, 'top');
+    const left = this.helpers.getPixelSize(cursorSelector, 'left');
+
+    cursor.css('top', (top + result.y));
+    cursor.css('left', (left + result.x));
+  }
+
+  destroy() {
+    $('.page-host .holoSight').remove();
   }
 
   location() {

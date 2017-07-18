@@ -2,16 +2,27 @@
 import '../static/styles.css';
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-slider/dist/css/bootstrap-slider.css';
 import 'babel-polyfill';
 import * as Bluebird from 'bluebird';
 
 // remove out if you don't want a Promise polyfill (remove also from webpack.config.js)
-Bluebird.config({ warnings: { wForgottenReturn: false } });
+Bluebird.config({
+  warnings: {
+    wForgottenReturn: false
+  }
+});
 
 export async function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
-    .developmentLogging();
+    .developmentLogging()
+    .plugin('aurelia-dialog', config => {
+      config.useDefaults();
+      config.settings.lock = true;
+      config.settings.centerHorizontalOnly = false;
+      config.settings.startingZIndex = 9999;
+    });
 
   // Uncomment the line below to enable animation.
   // aurelia.use.plugin(PLATFORM.moduleName('aurelia-animator-css'));

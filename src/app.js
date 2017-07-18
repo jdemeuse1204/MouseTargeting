@@ -18,7 +18,7 @@ export class App {
     config.title = 'Aurelia';
     config.map([
       { route: ['', 'home'], name: 'home',      moduleId: PLATFORM.moduleName('./home'),      nav: true, title: 'Home' },
-      { route: 'Tests/testOne', name: 'testOne',      moduleId: PLATFORM.moduleName('./Tests/testOne'),      nav: true, title: 'Test One' }
+      { route: 'Tests/TestOne/testOne', name: 'testOne',      moduleId: PLATFORM.moduleName('./Tests/TestOne/testOne'),      nav: true, title: 'Test One' }
     ]);
     /* beautify preserve:end */
     this.router = router;

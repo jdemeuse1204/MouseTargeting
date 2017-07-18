@@ -9,8 +9,12 @@ export default class LinearEnemy {
   helpers = undefined;
   hitPoints = 0;
   interval = 0;
+  xStopLocation = 0;
+  yStopLocation = 0;
 
-  constructor(hitPoints) {
+  constructor(hitPoints, xStopLocation, yStopLocation) {
+    this.xStopLocation = xStopLocation;
+    this.yStopLocation = yStopLocation;
     this.hitPoints = hitPoints;
     this.helpers = new Helpers();
   }
@@ -51,6 +55,8 @@ export default class LinearEnemy {
   }
 
   start(x, y, xMovePixels, yMovePixels) {
+    this.interval = 0;
+
     const enemyElementSelect = `${this.canvasSelector} .linearEnemy`;
     const enemyElement = $(enemyElementSelect);
 
@@ -73,7 +79,9 @@ export default class LinearEnemy {
         hasYMovePixels = true;
       }
 
-      if ((left <= 0 && hasXMovePixels) || (top <= 0 && hasYMovePixels)) {
+      if (this.xStopLocation > 0 && this.yStopLocation > 0 && ((left >= this.xStopLocation && hasXMovePixels) || (top >= this.yStopLocation && hasYMovePixels))) {
+        window.clearInterval(this.interval);
+      } else if (this.xStopLocation < 0 || this.yStopLocation < 0 && ((left <= this.xStopLocation && hasXMovePixels) || (top <= this.yStopLocation && hasYMovePixels))) {
         window.clearInterval(this.interval);
       } else {
         if (hasXMovePixels) {
