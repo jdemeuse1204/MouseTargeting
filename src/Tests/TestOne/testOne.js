@@ -8,33 +8,36 @@ import LinearEnemy from '../../objects/enemies/linearEnemy';
 import { DialogService } from 'aurelia-dialog';
 import { shootingScore } from '../../common/score';
 import Recoil from '../../objects/sights/recoil';
-import moment from 'moment';
+import Timer from '../../common/timer';
 import { PLATFORM } from 'aurelia-pal';
+import {default as ButtonListener, buttons } from '../../common/buttonListener';
 //import Slider from 'bootstrap-slider';
 /* beautify preserve:end */
 
-@inject(jQueryHelpers, ObjectBuilder, DialogService)
+@inject(jQueryHelpers, ObjectBuilder, DialogService, Timer)
 export default class TestOne {
 
   sight = null;
   enemy = null;
-  testStart = null;
-  testEnd = null;
+  showDetailsDisplay = 'block';
+  showShootingRangeDisplay = 'none';
 
   time = '';
   shotsFired = 0;
   shotsHit = 0;
   score = 0;
 
+  timer = null;
   helpers = null;
   objectHelper = null;
   dialogService = null;
   recoil = null;
 
-  constructor(helpers, objectHelper, dialogService) {
+  constructor(helpers, objectHelper, dialogService, timer) {
     this.helpers = helpers;
     this.objectHelper = objectHelper;
     this.dialogService = dialogService;
+    this.timer = timer;
     this.recoil = new Recoil(1, 1);
   }
 
@@ -51,8 +54,8 @@ export default class TestOne {
       this.shotsHit++;
       if (this.enemy.takeDamage() === false) {
         // end the test
-        this.testEnd = new Date();
-        this.time = moment(this.testEnd).diff(moment(this.testStart), 'milliseconds');
+        this.time = this.timer.getTime();
+        this.timer.reset();
         this.enemy.stop();
         this.enemy.destroy();
         this.sight.destroy();
@@ -115,25 +118,36 @@ export default class TestOne {
   }
 
   start() {
-    this.time = '';
-    this.shotsFired = 0;
-    this.shotsHit = 0;
-    this.score = 0;
+    const listener = new ButtonListener('body');
+
+    listener.listenOnce(buttons['0'], () => {
+      console.log(0);
+    });
+
+    listener.listenOnce(buttons['1'], () => {
+      console.log(1);
+    });
 
 
     this.objectHelper.build(w => {
+      this.showDetailsDisplay = 'none';
+      this.showShootingRangeDisplay = 'block';
+    }).build(w => {
+      // reset the score
+      this.time = '';
+      this.shotsFired = 0;
+      this.shotsHit = 0;
+      this.score = 0;
+
+      // start the timer
+      this.timer.start();
+
+      // create test objects
       this.sight = new HoloSight(this.recoil);
       this.enemy = new LinearEnemy(4, 800, 0);
       this.enemy.create('#testOneShootingRange');
-      this.enemy.start(0, 200, 0.5);
-
-      // start the test
-      this.testStart = new Date();
       this.sight.create('#testOneShootingRange', 16, 400);
-    }).build(w => {
-      //alert('TimeOut1');
-    }, 3000).build(w => {
-      //alert('TimeOut2');
-    }, 3000).compile().clear();
+      this.enemy.start(0, 200, 0.5);
+    }, 2000).compile().clear();
   }
 }
