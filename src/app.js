@@ -18,7 +18,8 @@ export class App {
     config.title = 'Aurelia';
     config.map([
       { route: ['', 'home'], name: 'home',      moduleId: PLATFORM.moduleName('./home'),      nav: true, title: 'Home' },
-      { route: 'Tests/TestOne/testOne', name: 'testOne',      moduleId: PLATFORM.moduleName('./Tests/TestOne/testOne'),      nav: true, title: 'Test One' }
+      { route: 'Tests/TestOne/testOne', name: 'testOne',      moduleId: PLATFORM.moduleName('./Tests/TestOne/testOne'),      nav: true, title: 'Test One' },
+      { route: 'Tests/GunRange/gunRange', name: 'gunRange',      moduleId: PLATFORM.moduleName('./Tests/GunRange/gunRange'),      nav: true, title: 'Gun Range' }
     ]);
     /* beautify preserve:end */
     this.router = router;

@@ -1,0 +1,39 @@
+<template>
+  <div class="page container" id="testOne">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Gun Range</h3>
+      </div>
+    </div>
+    <div class="row testDetails">
+      <div class="col-xs-12">
+        <!-- Test Details -->
+        <h4>Details</h4>
+        <p>The objective of this test is to elimitate the blue circle before it gets to the end of the shooting range.</p>
+        <div><b>Sight:&nbsp;</b>Holo</div>
+        <div><b>Magazine Size:&nbsp;</b>Infinite</div>
+        <div><b>Recoil:&nbsp;</b>Easy</div>
+        <div><b>Hit Points:&nbsp;</b>4</div>
+        <div><b>Enemy Speed:&nbsp;</b>Slow</div>
+        <div><b>Difficulty:&nbsp;</b>Very Easy</div>
+        <div><button class="btn btn-success" click.delegate="start()"><i class="fa fa-check"></i>&nbsp;Start</button></div>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="col-xs-12 shootingRangeContainer">
+        <!-- Test Area -->
+        <h4>Shooting Range</h4>
+        <div class="shootingRange" id="testOneShootingRange" style="cursor: default;">
+        </div>
+      </div>
+    </div>
+<!-- 
+    <div>
+      <input id="difficulty" data-slider-id='difficultySlider' type="text" data-slider-min="1" data-slider-max="10" data-slider-step="1"
+        data-slider-value="2" />
+    </div>
+     -->
+    
+
+  </div>
+</template>

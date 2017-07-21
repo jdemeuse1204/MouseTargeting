@@ -3,42 +3,31 @@ import './testOne.less';
 import jQueryHelpers from '../../common/jQueryHelpers';
 import ObjectBuilder from '../../common/objectBuilder';
 import { inject } from 'aurelia-dependency-injection';
-import HoloSight from '../../objects/sights/holo';
+import HoloSight from '../../objects/sights/holo/holo';
+import RedDotSight from '../../objects/sights/redDot/redDot';
 import LinearEnemy from '../../objects/enemies/linearEnemy';
 import { DialogService } from 'aurelia-dialog';
 import { shootingScore } from '../../common/score';
 import Recoil from '../../objects/sights/recoil';
 import Timer from '../../common/timer';
 import { PLATFORM } from 'aurelia-pal';
-import {default as ButtonListener, buttons } from '../../common/buttonListener';
+import { default as ButtonListener, buttons } from '../../common/buttonListener';
+import { countdown } from '../../common/overlays';
+import TestBase from '../testBase';
 //import Slider from 'bootstrap-slider';
 /* beautify preserve:end */
 
 @inject(jQueryHelpers, ObjectBuilder, DialogService, Timer)
-export default class TestOne {
+export default class TestOne extends TestBase {
 
-  sight = null;
-  enemy = null;
   showDetailsDisplay = 'block';
   showShootingRangeDisplay = 'none';
-
-  time = '';
-  shotsFired = 0;
-  shotsHit = 0;
-  score = 0;
-
-  timer = null;
-  helpers = null;
-  objectHelper = null;
   dialogService = null;
-  recoil = null;
 
   constructor(helpers, objectHelper, dialogService, timer) {
-    this.helpers = helpers;
-    this.objectHelper = objectHelper;
+    super(helpers, objectHelper, timer, null, new Recoil(1, 1));
     this.dialogService = dialogService;
-    this.timer = timer;
-    this.recoil = new Recoil(1, 1);
+    this.shootingRangeId = '#testOneShootingRange';
   }
 
   leftClick() {
@@ -92,62 +81,56 @@ export default class TestOne {
 
   }
 
-  attached() {
-    // const slider = new Slider('#difficulty', {
-    //   formatter: (value) => {
-    //     return 'Current value: ' + value;
-    //   }
-    // });
-
-    $('#testOneShootingRange').on('contextmenu', () => false);
-    $('#testOneShootingRange').on('mousedown', (e) => {
-      switch (e.which) {
-        case 1: // left mouse button
-          this.leftClick();
-          break;
-        case 2: // middle mouse button
-          break;
-        case 3: // right mouse button
-          this.rightClick();
-          break;
-        default:
-          alert('You have a strange Mouse!');
-          break;
-      }
-    });
-  }
-
   start() {
-    const listener = new ButtonListener('body');
+    const that = this;
+    this.showDetailsDisplay = 'none';
+    this.showShootingRangeDisplay = 'block';
 
-    listener.listenOnce(buttons['0'], () => {
-      console.log(0);
-    });
+    // reset the score
+    this.time = '';
+    this.shotsFired = 0;
+    this.shotsHit = 0;
+    this.score = 0;
 
-    listener.listenOnce(buttons['1'], () => {
-      console.log(1);
-    });
+    countdown(5, 'Starting in ').then(() => {
+      const listener = new ButtonListener('body');
 
+      listener.listenOnce(buttons['0'], () => {
+        console.log(0);
+      });
 
-    this.objectHelper.build(w => {
-      this.showDetailsDisplay = 'none';
-      this.showShootingRangeDisplay = 'block';
-    }).build(w => {
-      // reset the score
-      this.time = '';
-      this.shotsFired = 0;
-      this.shotsHit = 0;
-      this.score = 0;
+      listener.listenOnce(buttons['1'], () => {
+        console.log(1);
+      });
 
       // start the timer
-      this.timer.start();
+      that.timer.start();
 
       // create test objects
-      this.sight = new HoloSight(this.recoil);
-      this.enemy = new LinearEnemy(4, 800, 0);
-      this.enemy.create('#testOneShootingRange');
-      this.sight.create('#testOneShootingRange', 16, 400);
-      this.enemy.start(0, 200, 0.5);
-    }, 2000).compile().clear();
+      that.sight = new RedDotSight(that.recoil);
+      //that.sight = new RedDotSight(that.recoil);
+      that.enemy = new LinearEnemy(4, 800, 0);
+      that.enemy.create('#testOneShootingRange');
+      that.sight.create('#testOneShootingRange');
+      that.enemy.start(0, 200, 0.5);
+
+      // this.objectHelper.build(w => {}).build(w => {
+      //   // reset the score
+      //   this.time = '';
+      //   this.shotsFired = 0;
+      //   this.shotsHit = 0;
+      //   this.score = 0;
+
+      //   // start the timer
+      //   this.timer.start();
+
+      //   // create test objects
+      //   this.sight = new HoloSight(this.recoil);
+      //   this.enemy = new LinearEnemy(4, 800, 0);
+      //   this.enemy.create('#testOneShootingRange');
+      //   this.sight.create('#testOneShootingRange', 16, 400);
+      //   this.enemy.start(0, 200, 0.5);
+      // }, 2000).compile().clear();
+    });
   }
 }
