@@ -4,6 +4,7 @@ import jQueryHelpers from '../../common/jQueryHelpers';
 import ObjectBuilder from '../../common/objectBuilder';
 import { inject } from 'aurelia-dependency-injection';
 import HoloSight from '../../objects/sights/holo/holo';
+import AcogSight from '../../objects/sights/acog/acog';
 import RedDotSight from '../../objects/sights/redDot/redDot';
 import LinearEnemy from '../../objects/enemies/linearEnemy';
 import { DialogService } from 'aurelia-dialog';
@@ -107,7 +108,7 @@ export default class TestOne extends TestBase {
       that.timer.start();
 
       // create test objects
-      that.sight = new RedDotSight(that.recoil);
+      that.sight = new AcogSight(that.recoil);
       //that.sight = new RedDotSight(that.recoil);
       that.enemy = new LinearEnemy(4, 800, 0);
       that.enemy.create('#testOneShootingRange');
