@@ -1,0 +1,25 @@
+--Tests--
+Gun Range
+Hold buttons while shooting
+create button sequence
+change recoil
+change enemy type
+
+
+1.  Shoot Enemy with 4 hit points (Easy/Medium/Hard) (Size and hit points)
+2.  Shoot Enemy with 15 hit points, mag size = 7 (Easy/Medium/Hard)
+3.  Strafe and hit enemy  (Easy/Medium/Hard)
+4.  Hold E or W and hit Enemy (peek around object) (Easy/Medium/Hard)
+6.  Wack a mole 1 hp each (Easy/Medium/Hard) (difficulty dependent on target size and hp)
+5.  Change Weapons, reload to kill enemy, (tiny clip)
+7.  Headshots only (center of target)
+8.  Full Auto gun
+11. Crouch, then prone then shoot
+12. wack a mole buttons while shooting, crouch, prone, reload, change fire mode, shoot, zoom in, etc (easy md, hard)
+13. shoot on the move.... keep dot in center while shooting
+14. Hold shift while shooting
+15. multiple enemies, pick the right ones (only shoot one of certain color)
+
+
+Test Types - Mouse or Keyboard or Both
+Test Designer - Gun Range
