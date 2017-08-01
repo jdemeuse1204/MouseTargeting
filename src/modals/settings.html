@@ -1,0 +1,163 @@
+<template>
+  <div class="modal-content" id="settingsModal">
+    <ai-dialog class="modal-dialog modal-md">
+      <ai-dialog-body>
+        <div class="modal-header">
+          <h2>Settings</h2>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-6">
+              <label>
+                Forward
+                <select value.bind="buttonSettings.forward" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+            <div class="col-xs-6">
+              <label>
+                Backward
+                <select value.bind="buttonSettings.backward" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <label>
+                Left
+                <select value.bind="buttonSettings.left" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+            <div class="col-xs-6">
+              <label>
+                Right
+                <select value.bind="buttonSettings.right" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <label>
+                Peek Left
+                <select value.bind="buttonSettings.peekLeft" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+            <div class="col-xs-6">
+              <label>
+                Peek Right
+                <select value.bind="buttonSettings.peekRight" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <label>
+                Jump
+                <select value.bind="buttonSettings.jump" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+            <div class="col-xs-6">
+              <label>
+                Crouch
+                <select value.bind="buttonSettings.crouch" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <label>
+                Reload
+                <select value.bind="buttonSettings.reload" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+            <div class="col-xs-6">
+              <label>
+                Weapon 1
+                <select value.bind="buttonSettings.weapon1" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <label>
+                Weapon 2
+                <select value.bind="buttonSettings.weapon2" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+            <div class="col-xs-6">
+              <label>
+                Weapon 3
+                <select value.bind="buttonSettings.weapon3" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <label>
+                Weapon 4
+                <select value.bind="buttonSettings.weapon4" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+            <div class="col-xs-6">
+              <label>
+                Weapon 5
+                <select value.bind="buttonSettings.weapon5" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <label>
+                Steady Scope
+                <select value.bind="buttonSettings.steadyScope" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+            <div class="col-xs-6">
+              <label>
+                Prone
+                <select value.bind="buttonSettings.prone" class="pull-right">
+                  <option repeat.for="button of selectableButtons" model.bind="button.value">${button.name}</option>
+                </select> 
+              </label>
+            </div>
+          </div>
+        </div>
+      </ai-dialog-body>
+      <ai-dialog-footer>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger pull-left" click.trigger="controller.cancel()"><i class="fa fa-check"></i>&nbsp;Cancel</button>
+          <button type="button" class="btn btn-success pull-right" click.trigger="controller.ok()"><i class="fa fa-forward"></i>&nbsp;Save</button>
+        </div>
+      </ai-dialog-footer>
+    </ai-dialog>
+  </div>
+</template>

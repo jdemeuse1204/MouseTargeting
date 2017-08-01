@@ -82,6 +82,15 @@ export default class TestOne extends TestBase {
 
   }
 
+  settings() {
+    this.dialogService.open({
+      viewModel: PLATFORM.moduleName('modals/settings'),
+      model: {}
+    }).then(response => {
+
+    });
+  }
+
   start() {
     const that = this;
     this.showDetailsDisplay = 'none';
@@ -93,7 +102,7 @@ export default class TestOne extends TestBase {
     this.shotsHit = 0;
     this.score = 0;
 
-    countdown(5, 'Starting in ').then(() => {
+    countdown(3, 'Starting in ').then(() => {
       const listener = new ButtonListener('body');
 
       listener.listenOnce(buttons['0'], () => {

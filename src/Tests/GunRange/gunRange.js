@@ -13,6 +13,7 @@ import Timer from '../../common/timer';
 import { PLATFORM } from 'aurelia-pal';
 import { default as ButtonListener, buttons } from '../../common/buttonListener';
 import { countdown } from '../../common/overlays';
+import { buttonMap } from '../settings';
 //import Slider from 'bootstrap-slider';
 /* beautify preserve:end */
 
@@ -131,12 +132,16 @@ export default class GunRange {
     this.score = 0;
     const listener = new ButtonListener('body');
 
-    listener.listenOnce(buttons['0'], () => {
-      console.log(0);
+    listener.listenOnce(buttonMap.jump, () => {
+      console.log('Down 0');
+    }, () => {
+      console.log('Up 0');
     });
 
-    listener.listenOnce(buttons['1'], () => {
-      console.log(1);
+    listener.listenOnce(buttons.a, () => {
+      console.log('Down 1');
+    }, () => {
+      console.log('Up 1');
     });
 
     // start the timer

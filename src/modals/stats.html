@@ -1,17 +1,19 @@
 <template>
+  <div class="modal-content">
     <ai-dialog class="modal-dialog modal-md">
-        <ai-dialog-body>
-            <div class="modal-header">
-                <h2>${model.testName} - Results</h2>
-            </div>
-            <div class="modal-body" innerhtml.bind="model.statsHtml">
-            </div>
-        </ai-dialog-body>
-        <ai-dialog-footer>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" click.trigger="controller.ok()"><i class="fa fa-check"></i>&nbsp;Ok</button>
-            <button type="button" class="btn btn-primary pull-right" click.trigger="controller.ok()"><i class="fa fa-forward"></i>&nbsp;Next Test</button>
-          </div>
-        </ai-dialog-footer>
+      <ai-dialog-body>
+        <div class="modal-header">
+          <h2>${model.testName} - Results</h2>
+        </div>
+        <div class="modal-body" innerhtml.bind="model.statsHtml">
+        </div>
+      </ai-dialog-body>
+      <ai-dialog-footer>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" click.trigger="controller.ok()"><i class="fa fa-check"></i>&nbsp;Ok</button>
+          <button type="button" class="btn btn-primary pull-right" click.trigger="controller.ok()"><i class="fa fa-forward"></i>&nbsp;Next Test</button>
+        </div>
+      </ai-dialog-footer>
     </ai-dialog>
+  </div>
 </template>
