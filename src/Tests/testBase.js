@@ -26,7 +26,7 @@ export default class TestBase {
   attached() {
     const shootingRangeElement = $(this.shootingRangeId);
     shootingRangeElement.on('contextmenu', () => false);
-    shootingRangeElement.on('mousedown', (e) => {
+    shootingRangeElement.on('mousedown', e => {
       switch (e.which) {
       case 1: // left mouse button
         this.leftClick(e);

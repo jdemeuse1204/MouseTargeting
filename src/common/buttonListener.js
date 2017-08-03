@@ -26,7 +26,67 @@ export default class ButtonListener {
     }
   }
 
-  listenOnce(button, buttonDownCallback, buttonUpCallback) {
+  listenOnceOrderedQueue(buttons, buttonDownCallback, buttonUpCallback, missedButtonCallback) {
+    const that = this;
+    const buttonsList = buttons;
+
+    for (let i = 0; i < buttons.length; i++) {
+      this.listenOnceFunctions[buttons[i]].downFn = buttonDownCallback;
+      this.listenOnceFunctions[buttons[i]].upFn = buttonUpCallback;
+    }
+
+    if (listenOnceKeyPressRegistered === false) {
+      document.getElementById('body').addEventListener('keydown', e => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // so the function doesnt keep getting called on hold
+        if (that.listenOnceFunctions[e.which].state === buttonState.down) {
+          return;
+        }
+
+        if (buttonsList[0] !== e.which) {
+          missedButtonCallback(e.which);
+          return;
+        }
+
+        const fn = that.listenOnceFunctions[e.which].downFn;
+
+        // mark button state as down
+        that.listenOnceFunctions[e.which].state = buttonState.down;
+        if (fn) {
+          fn();
+          buttonsList.shift();
+          that.listenOnceFunctions[e.which].downFn = undefined;
+        }
+      });
+      listenOnceKeyPressRegistered = true;
+    }
+
+    if (listenOnceKeyUpRegistered === false) {
+      document.getElementById('body').addEventListener('keyup', e => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // so the function doesnt keep getting called on hold
+        if (that.listenOnceFunctions[e.which].state === buttonState.up) {
+          return;
+        }
+
+        const fn = that.listenOnceFunctions[e.which].upFn;
+
+        // mark button state as down
+        that.listenOnceFunctions[e.which].state = buttonState.up;
+        if (fn) {
+          fn();
+          that.listenOnceFunctions[e.which].upFn = undefined;
+        }
+      });
+      listenOnceKeyUpRegistered = true;
+    }
+  }
+
+  listenOnce(button, buttonDownCallback, buttonUpCallback, missedButtonCallback) {
     const that = this;
     this.listenOnceFunctions[button].downFn = buttonDownCallback;
     this.listenOnceFunctions[button].upFn = buttonUpCallback;
@@ -48,6 +108,8 @@ export default class ButtonListener {
         if (fn) {
           fn();
           that.listenOnceFunctions[e.which].downFn = undefined;
+        } else {
+          missedButtonCallback();
         }
       });
       listenOnceKeyPressRegistered = true;
@@ -102,7 +164,7 @@ export default class ButtonListener {
 
     if (listenKeyUpRegistered === false) {
       document.getElementById('body').addEventListener('keyup', e => {
-        e.preventDefault();// prevent weird webpage interactions
+        e.preventDefault(); // prevent weird webpage interactions
         e.stopPropagation();
 
         // so the function doesnt keep getting called on hold

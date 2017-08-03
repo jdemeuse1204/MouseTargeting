@@ -117,8 +117,8 @@ export default class TestOne extends TestBase {
       that.timer.start();
 
       // create test objects
-      that.sight = new AcogSight(that.recoil);
-      //that.sight = new RedDotSight(that.recoil);
+      //that.sight = new AcogSight(that.recoil);
+      that.sight = new RedDotSight(that.recoil);
       that.enemy = new LinearEnemy(4, 800, 0);
       that.enemy.create('#testOneShootingRange');
       that.sight.create('#testOneShootingRange');

@@ -24,6 +24,7 @@ export default class GunRange {
   enemy = null;
   showDetailsDisplay = 'block';
   showShootingRangeDisplay = 'none';
+  isListening = false;
 
   time = '';
   shotsFired = 0;
@@ -42,6 +43,10 @@ export default class GunRange {
     this.dialogService = dialogService;
     this.timer = timer;
     this.recoil = new Recoil(1, 1);
+  }
+
+  missed(message) {
+    console.log(message);
   }
 
   leftClick() {
@@ -132,17 +137,28 @@ export default class GunRange {
     this.score = 0;
     const listener = new ButtonListener('body');
 
-    listener.listenOnce(buttonMap.jump, () => {
+    listener.listenOnceOrderedQueue([buttonMap.jump, buttonMap.crouch], () => {
       console.log('Down 0');
+      that.isListening = true;
     }, () => {
+      that.isListening = false;
       console.log('Up 0');
+    }, (button) => {
+      console.log('Missed Button');
+      // missed
+      that.missed(`Wrong button pressed${button}`);
     });
 
-    listener.listenOnce(buttons.a, () => {
-      console.log('Down 1');
-    }, () => {
-      console.log('Up 1');
-    });
+    // listener.listenOnce(buttons.a, () => {
+    //   console.log('Down 1');
+    //   that.isListening = true;
+    // }, () => {
+    //   console.log('Up 1');
+    //   that.isListening = false;
+    // }, () => {
+    //   console.log('Missed Button');
+    //   // missed
+    // });
 
     // start the timer
     that.timer.start();
