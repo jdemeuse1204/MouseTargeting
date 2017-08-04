@@ -21,8 +21,8 @@ import TestBase from '../testBase';
 @inject(jQueryHelpers, ObjectBuilder, DialogService, Timer)
 export default class TestOne extends TestBase {
 
-  showDetailsDisplay = 'block';
-  showShootingRangeDisplay = 'none';
+  showDetailsDisplay = 'none';
+  showShootingRangeDisplay = 'block';
   dialogService = null;
 
   constructor(helpers, objectHelper, dialogService, timer) {
