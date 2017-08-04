@@ -16,4 +16,18 @@ export default class StatsModal {
     this.model = model;
   }
 
+  allTests() {
+    this.controller.ok();
+    window.location.href = '/#/Tests/All';
+  }
+
+  nextTest() {
+    this.controller.ok();
+    window.location.href = this.model.nextTestLocationHref;
+  }
+
+  restart() {
+    this.controller.ok();
+    window.location.reload();
+  }
 }

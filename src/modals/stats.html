@@ -10,8 +10,9 @@
       </ai-dialog-body>
       <ai-dialog-footer>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" click.trigger="controller.ok()"><i class="fa fa-check"></i>&nbsp;Ok</button>
-          <button type="button" class="btn btn-primary pull-right" click.trigger="controller.ok()"><i class="fa fa-forward"></i>&nbsp;Next Test</button>
+          <button type="button" class="btn btn-primary pull-left" click.trigger="allTests()"><i class="fa fa-list"></i>&nbsp;All Tests</button>
+          <button type="button" class="btn btn-default pull-left" click.trigger="restart()"><i class="fa fa-repeat"></i>&nbsp;Restart</button>
+          <button type="button" class="btn btn-success pull-right" click.trigger="controller.ok()"><i class="fa fa-forward"></i>&nbsp;Next Test</button>
         </div>
       </ai-dialog-footer>
     </ai-dialog>

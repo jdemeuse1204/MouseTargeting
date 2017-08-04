@@ -1,14 +1,14 @@
 <template>
-  <div class="page container" id="testOne">
+  <div class="page container text-center" id="testOne">
     <button role="button" class="btn btn-primary pull-right" click.delegate="settings()"><i class="fa fa-gear"></i></button>
     <div class="row">
       <div class="col-xs-12">
-        <h3>Test #1</h3>
-        <h4>Eliminate Blue Circle</h4>
+        <h3>Test #1 - Take Down Target</h3>
+        <h4>Mouse Only <i class="fa fa-mouse"></i></h4>
       </div>
     </div>
     <div class="row testDetails" css.bind="{display:showDetailsDisplay}">
-      <div class="col-xs-12">
+      <div class="col-xs-12 text-center">
         <!-- Test Details -->
         <h4>Details</h4>
         <p>The objective of this test is to elimitate the blue circle before it gets to the end of the shooting range.</p>
@@ -26,21 +26,13 @@
         <!-- Test Area -->
         <h2>Shooting Range</h2>
         <div class="shootingRangeHeader">
-          <div>Weapon 1<span>Gun: M164A</span></div>
-          <div>Weapon 2<span>Gun: AKM</span></div>
+          <div>Weapon 1:&emsp;<span>${weaponOne.name}</span></div>
+          <!-- <div>Weapon 2:&emsp;<span>AKM</span></div> -->
         </div>
         <div class="shootingRange" id="testOneShootingRange">
-          <div class="text-center shootingRangeHUD">AKM&emsp;10&nbsp;/&nbsp;10</div>
+          <div class="text-center shootingRangeHUD">AKM&emsp;Infinite&nbsp;/&nbsp;Infinite</div>
         </div>
       </div>
-    </div>
-<!-- 
-    <div>
-      <input id="difficulty" data-slider-id='difficultySlider' type="text" data-slider-min="1" data-slider-max="10" data-slider-step="1"
-        data-slider-value="2" />
-    </div>
-     -->
-    
-
+    </div> 
   </div>
 </template>

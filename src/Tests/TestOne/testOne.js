@@ -15,20 +15,24 @@ import { PLATFORM } from 'aurelia-pal';
 import { default as ButtonListener, buttons } from '../../common/buttonListener';
 import { countdown } from '../../common/overlays';
 import TestBase from '../testBase';
+import Gun from '../../common/gun';
 //import Slider from 'bootstrap-slider';
 /* beautify preserve:end */
 
 @inject(jQueryHelpers, ObjectBuilder, DialogService, Timer)
 export default class TestOne extends TestBase {
 
-  showDetailsDisplay = 'none';
-  showShootingRangeDisplay = 'block';
+  showDetailsDisplay = 'block';
+  showShootingRangeDisplay = 'none';
   dialogService = null;
+  weaponOne = undefined;
+  weaponTwo = undefined;
 
   constructor(helpers, objectHelper, dialogService, timer) {
     super(helpers, objectHelper, timer, null, new Recoil(1, 1));
     this.dialogService = dialogService;
     this.shootingRangeId = '#testOneShootingRange';
+    this.weaponOne = new Gun('M164A', -1);
   }
 
   leftClick() {
@@ -66,7 +70,8 @@ export default class TestOne extends TestBase {
             '<h3>' +
             `Total Rank:&nbsp;${this.score}` +
             '</h3>',
-          testName: 'Test #1 Results'
+          testName: 'Test #1 Results',
+          nextTestLocationHref: ''
         };
         this.dialogService.open({
           viewModel: PLATFORM.moduleName('modals/stats'),
@@ -118,7 +123,7 @@ export default class TestOne extends TestBase {
 
       // create test objects
       //that.sight = new AcogSight(that.recoil);
-      that.sight = new RedDotSight(that.recoil);
+      that.sight = new HoloSight(that.recoil);
       that.enemy = new LinearEnemy(4, 800, 0);
       that.enemy.create('#testOneShootingRange');
       that.sight.create('#testOneShootingRange');
