@@ -1,0 +1,33 @@
+<template>
+  <div class="page container text-center" id="testSix">
+    <button role="button" class="btn btn-primary pull-right" click.delegate="settings()"><i class="fa fa-gear"></i></button>
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Test #6 - Wack-A-Mole Buttons</h3>
+        <h4>Keyboard Only <i class="fa fa-keyboard"></i></h4>
+      </div>
+    </div>
+    <div class="row testDetails" css.bind="{display:showDetailsDisplay}">
+      <div class="col-xs-12 text-center">
+        <!-- Test Details -->
+        <h4>Details</h4>
+        <p>The objective of this test is to elimitate the blue circle before it gets to the end of the shooting range.</p>
+        <div><b>Difficulty:&nbsp;</b>Very Easy</div>
+        <div><button class="btn btn-success" click.delegate="start()"><i class="fa fa-check"></i>&nbsp;Start</button></div>
+      </div>
+    </div>
+    <div class="row" css.bind="{display:showShootingRangeDisplay}">
+      <div class="col-xs-12 shootingRangeContainer">
+        <!-- Test Area -->
+        <h2>Shooting Range</h2>
+        <div class="shootingRangeHeader">
+          <!-- <div>Weapon 1:&emsp;<span>${weaponOne.name}</span></div> -->
+          <!-- <div>Weapon 2:&emsp;<span>AKM</span></div> -->
+        </div>
+        <div class="shootingRange" id="testSixShootingRange">
+          <div class="text-center shootingRangeHUD">Press ${buttonToPress}</div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</template>

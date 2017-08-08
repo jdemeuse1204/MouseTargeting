@@ -19,6 +19,7 @@ export class App {
     config.map([
       { route: ['', 'home'], name: 'home',      moduleId: PLATFORM.moduleName('./home'),      nav: true, title: 'Home' },
       { route: 'Tests/TestOne/testOne', name: 'testOne',      moduleId: PLATFORM.moduleName('./Tests/TestOne/testOne'),      nav: true, title: 'Test One' },
+      { route: 'Tests/TestSix/testSix', name: 'testSix',      moduleId: PLATFORM.moduleName('./Tests/TestSix/testSix'),      nav: true, title: 'Test Six' },
       { route: 'Tests/GunRange/gunRange', name: 'gunRange',      moduleId: PLATFORM.moduleName('./Tests/GunRange/gunRange'),      nav: true, title: 'Gun Range' },
 
       { route: 'Tests/All', name: 'allTests',      moduleId: PLATFORM.moduleName('./Tests/allTests'),      nav: true, title: 'All Tests' }

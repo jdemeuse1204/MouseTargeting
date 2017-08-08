@@ -55,9 +55,8 @@ export default class ButtonListener {
         // mark button state as down
         that.listenOnceFunctions[e.which].state = buttonState.down;
         if (fn) {
-          fn();
           buttonsList.shift();
-          that.listenOnceFunctions[e.which].downFn = undefined;
+          fn(buttonsList[0], buttonsList.length);
         }
       });
       listenOnceKeyPressRegistered = true;
@@ -79,7 +78,6 @@ export default class ButtonListener {
         that.listenOnceFunctions[e.which].state = buttonState.up;
         if (fn) {
           fn();
-          that.listenOnceFunctions[e.which].upFn = undefined;
         }
       });
       listenOnceKeyUpRegistered = true;
